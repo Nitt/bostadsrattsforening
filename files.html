@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokument - Bostadsrättsförening</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-building"></i>
+                <span>Bostadsrättsförening</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="entries.html" class="nav-link">Uppdatera Poster</a></li>
+                <li><a href="3d-view.html" class="nav-link">3D Kvarter</a></li>
+                <li><a href="files.html" class="nav-link active">Dokument</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-file-alt"></i> Dokument</h1>
+                <p>Regler, ekonomiska sammanfattningar och andra viktiga dokument</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Upload Section -->
+            <div class="content-section">
+                <div class="form-container">
+                    <h2>Ladda upp nytt dokument</h2>
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label for="document-category">Kategori</label>
+                            <select id="document-category" name="documentCategory" required>
+                                <option value="">Välj kategori</option>
+                                <option value="rules">Stadgar och regler</option>
+                                <option value="economics">Ekonomiska dokument</option>
+                                <option value="meetings">Protokoll och möteshandlingar</option>
+                                <option value="maintenance">Underhåll och drift</option>
+                                <option value="insurance">Försäkringar</option>
+                                <option value="other">Övrigt</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="document-title">Dokumenttitel</label>
+                            <input type="text" id="document-title" name="documentTitle" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="document-description">Beskrivning</label>
+                            <textarea id="document-description" name="documentDescription" placeholder="Kort beskrivning av dokumentet"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dokumentfil</label>
+                            <div class="file-upload" onclick="document.getElementById('file-input').click()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Klicka för att välja fil eller dra och släpp här</p>
+                                <p><small>Stödda format: PDF, DOC, DOCX, XLS, XLSX (Max 10MB)</small></p>
+                                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx" style="display: none;">
+                            </div>
+                            <div id="file-preview" style="display: none;">
+                                <div class="selected-file">
+                                    <i class="fas fa-file"></i>
+                                    <span id="file-name"></span>
+                                    <button type="button" id="remove-file"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-upload"></i>
+                            Ladda upp dokument
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Document Categories -->
+            <div class="content-section">
+                <div class="container">
+                    <h2>Dokumentkategorier</h2>
+                    <div class="document-categories">
+                        <div class="category-tabs">
+                            <button class="category-tab active" data-category="all">Alla dokument</button>
+                            <button class="category-tab" data-category="rules">Stadgar och regler</button>
+                            <button class="category-tab" data-category="economics">Ekonomi</button>
+                            <button class="category-tab" data-category="meetings">Protokoll</button>
+                            <button class="category-tab" data-category="maintenance">Underhåll</button>
+                            <button class="category-tab" data-category="insurance">Försäkringar</button>
+                        </div>
+
+                        <!-- Search and Filter -->
+                        <div class="document-controls">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="document-search" placeholder="Sök dokument...">
+                            </div>
+                            <div class="sort-options">
+                                <select id="sort-documents">
+                                    <option value="date-desc">Nyast först</option>
+                                    <option value="date-asc">Äldst först</option>
+                                    <option value="name-asc">Namn A-Ö</option>
+                                    <option value="name-desc">Namn Ö-A</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Document Lists -->
+                        <div class="document-list" id="document-list">
+                            <!-- Rules and Regulations -->
+                            <div class="document-item" data-category="rules">
+                                <div class="document-icon">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Föreningens stadgar</h4>
+                                    <p>Gällande stadgar från 2023</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-12-15</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 45 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="document-item" data-category="rules">
+                                <div class="document-icon">
+                                    <i class="fas fa-list-ul"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Ordningsregler</h4>
+                                    <p>Regler för användning av gemensamma utrymmen</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-11-20</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 23 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Economics -->
+                            <div class="document-item" data-category="economics">
+                                <div class="document-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Årsredovisning 2023</h4>
+                                    <p>Fullständig ekonomisk rapport för 2023</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2024-01-15</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 67 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="document-item" data-category="economics">
+                                <div class="document-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Budget 2024</h4>
+                                    <p>Godkänd budget för verksamhetsår 2024</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-12-01</span>
+                                        <span><i class="fas fa-file-excel"></i> XLSX</span>
+                                        <span><i class="fas fa-download"></i> 34 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Meeting Protocols -->
+                            <div class="document-item" data-category="meetings">
+                                <div class="document-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Årsstämmoprotokoll 2023</h4>
+                                    <p>Protokoll från årsstämman den 15 mars 2023</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-03-20</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 89 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Maintenance -->
+                            <div class="document-item" data-category="maintenance">
+                                <div class="document-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Underhållsplan 2024-2029</h4>
+                                    <p>Långsiktig plan för underhåll av byggnader</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-10-15</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 28 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Insurance -->
+                            <div class="document-item" data-category="insurance">
+                                <div class="document-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="document-info">
+                                    <h4>Fastighetsförsäkring</h4>
+                                    <p>Aktuellt försäkringsbrev och villkor</p>
+                                    <div class="document-meta">
+                                        <span><i class="fas fa-calendar"></i> 2023-12-31</span>
+                                        <span><i class="fas fa-file-pdf"></i> PDF</span>
+                                        <span><i class="fas fa-download"></i> 12 nedladdningar</span>
+                                    </div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action" title="Ladda ner">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn-action" title="Förhandsgranska">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action" title="Redigera">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Statistics -->
+            <div class="content-section">
+                <div class="container">
+                    <h2>Dokumentstatistik</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">34</div>
+                                <div class="stat-label">Totalt dokument</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">567</div>
+                                <div class="stat-label">Nedladdningar denna månad</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Uppdateringar senaste veckan</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">245</div>
+                                <div class="stat-label">MB total storlek</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Bostadsrättsförening. Alla rättigheter förbehållna.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="files.js"></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uppdatera Poster - Bostadsrättsförening</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-building"></i>
+                <span>Bostadsrättsförening</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="entries.html" class="nav-link active">Uppdatera Poster</a></li>
+                <li><a href="3d-view.html" class="nav-link">3D Kvarter</a></li>
+                <li><a href="files.html" class="nav-link">Dokument</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-edit"></i> Uppdatera Poster</h1>
+                <p>Lägg till eller redigera information om bostäder och föreningsärenden</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Entry Type Selection -->
+            <div class="content-section">
+                <div class="form-container">
+                    <h2>Välj typ av post</h2>
+                    <div class="entry-types">
+                        <button class="entry-type-btn active" data-type="apartment">
+                            <i class="fas fa-home"></i>
+                            <span>Lägenhet</span>
+                        </button>
+                        <button class="entry-type-btn" data-type="meeting">
+                            <i class="fas fa-users"></i>
+                            <span>Stämma/Möte</span>
+                        </button>
+                        <button class="entry-type-btn" data-type="maintenance">
+                            <i class="fas fa-tools"></i>
+                            <span>Underhåll</span>
+                        </button>
+                        <button class="entry-type-btn" data-type="finance">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Ekonomi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apartment Form -->
+            <div class="content-section entry-form" id="apartment-form">
+                <div class="form-container">
+                    <h2>Lägenhetsinformation</h2>
+                    <form id="apartmentForm">
+                        <div class="form-group">
+                            <label for="apartment-number">Lägenhetsnummer</label>
+                            <input type="text" id="apartment-number" name="apartmentNumber" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="owner-name">Ägarens namn</label>
+                            <input type="text" id="owner-name" name="ownerName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-info">Kontaktuppgifter</label>
+                            <input type="email" id="contact-info" name="contactInfo" placeholder="E-post eller telefon">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apartment-size">Storlek (kvm)</label>
+                            <input type="number" id="apartment-size" name="apartmentSize" min="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="rooms">Antal rum</label>
+                            <select id="rooms" name="rooms">
+                                <option value="">Välj antal rum</option>
+                                <option value="1">1 rum</option>
+                                <option value="2">2 rum</option>
+                                <option value="3">3 rum</option>
+                                <option value="4">4 rum</option>
+                                <option value="5+">5+ rum</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apartment-notes">Anteckningar</label>
+                            <textarea id="apartment-notes" name="apartmentNotes" placeholder="Eventuella anteckningar om lägenheten"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-save"></i>
+                            Spara lägenhetsinformation
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Meeting Form -->
+            <div class="content-section entry-form" id="meeting-form" style="display: none;">
+                <div class="form-container">
+                    <h2>Stämma/Möte</h2>
+                    <form id="meetingForm">
+                        <div class="form-group">
+                            <label for="meeting-title">Titel</label>
+                            <input type="text" id="meeting-title" name="meetingTitle" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="meeting-date">Datum</label>
+                            <input type="date" id="meeting-date" name="meetingDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="meeting-time">Tid</label>
+                            <input type="time" id="meeting-time" name="meetingTime" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="meeting-location">Plats</label>
+                            <input type="text" id="meeting-location" name="meetingLocation">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="meeting-agenda">Dagordning</label>
+                            <textarea id="meeting-agenda" name="meetingAgenda" placeholder="Beskriv dagordningen för mötet"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-calendar-plus"></i>
+                            Spara mötesinformation
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Maintenance Form -->
+            <div class="content-section entry-form" id="maintenance-form" style="display: none;">
+                <div class="form-container">
+                    <h2>Underhållsärende</h2>
+                    <form id="maintenanceForm">
+                        <div class="form-group">
+                            <label for="maintenance-type">Typ av underhåll</label>
+                            <select id="maintenance-type" name="maintenanceType" required>
+                                <option value="">Välj typ</option>
+                                <option value="emergency">Akut</option>
+                                <option value="routine">Rutinunderhåll</option>
+                                <option value="renovation">Renovering</option>
+                                <option value="inspection">Besiktning</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="maintenance-location">Plats/Område</label>
+                            <input type="text" id="maintenance-location" name="maintenanceLocation" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="maintenance-description">Beskrivning</label>
+                            <textarea id="maintenance-description" name="maintenanceDescription" placeholder="Beskriv underhållsbehovet" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="maintenance-priority">Prioritet</label>
+                            <select id="maintenance-priority" name="maintenancePriority">
+                                <option value="low">Låg</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">Hög</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="maintenance-cost">Beräknad kostnad (SEK)</label>
+                            <input type="number" id="maintenance-cost" name="maintenanceCost" min="0">
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-wrench"></i>
+                            Spara underhållsärende
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Finance Form -->
+            <div class="content-section entry-form" id="finance-form" style="display: none;">
+                <div class="form-container">
+                    <h2>Ekonomisk post</h2>
+                    <form id="financeForm">
+                        <div class="form-group">
+                            <label for="finance-category">Kategori</label>
+                            <select id="finance-category" name="financeCategory" required>
+                                <option value="">Välj kategori</option>
+                                <option value="income">Intäkt</option>
+                                <option value="expense">Kostnad</option>
+                                <option value="investment">Investering</option>
+                                <option value="reserve">Reserv</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="finance-description">Beskrivning</label>
+                            <input type="text" id="finance-description" name="financeDescription" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="finance-amount">Belopp (SEK)</label>
+                            <input type="number" id="finance-amount" name="financeAmount" step="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="finance-date">Datum</label>
+                            <input type="date" id="finance-date" name="financeDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="finance-notes">Anteckningar</label>
+                            <textarea id="finance-notes" name="financeNotes" placeholder="Eventuella anteckningar"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-money-bill-wave"></i>
+                            Spara ekonomisk post
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Entries -->
+            <div class="content-section">
+                <div class="form-container">
+                    <h2>Senaste poster</h2>
+                    <div class="recent-entries" id="recent-entries">
+                        <div class="entry-item">
+                            <div class="entry-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="entry-content">
+                                <h4>Lägenhet 12A</h4>
+                                <p>Uppdaterad ägarinformation</p>
+                                <small>2024-01-15</small>
+                            </div>
+                            <div class="entry-actions">
+                                <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="entry-item">
+                            <div class="entry-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="entry-content">
+                                <h4>Årsstämma 2024</h4>
+                                <p>Schemalagt för 2024-03-15</p>
+                                <small>2024-01-10</small>
+                            </div>
+                            <div class="entry-actions">
+                                <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Bostadsrättsförening. Alla rättigheter förbehållna.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="entries.js"></script>
+</body>
+</html>
